@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">LearningAppEngine</string>
+    <string name="hint_story_name">Story Name</string>
+    <string name="hint_sprint">Sprint</string>
+    <string name="btn_create">CREATE</string>
+    <string name="btn_message">Google cloud endpoints with AngularJS</string>
+    <string name="story_name_required">Story Name is Required!</string>
+    <string name="sprint_required">Sprint is Required!</string>
+    <string name="error_number_participants">Please, select Nº of participants</string>
+    <string name="error_component">Please, select the component</string>
+    <string name="wait">Please, wait...</string>
+    <string name="new_story_success">New story has been created successfully</string>
+    <string name="new_story_error">An unexpected error ocurrers</string>
+
+    // number of people
+    <string-array name="participants_array">
+        <item>Select Nº of Participants</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    // Component values
+    <string-array name="component_array">
+        <item>Select the Component</item>
+        <item>RAS</item>
+        <item>LSMS</item>
+        <item>EDI</item>
+    </string-array>
+
+</resources>

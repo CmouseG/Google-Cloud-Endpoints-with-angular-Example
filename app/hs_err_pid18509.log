@@ -1,0 +1,65 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 147849216 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2827), pid=18509, tid=139685631321856
+#
+# JRE version: OpenJDK Runtime Environment (7.0_91-b02) (build 1.7.0_91-b02)
+# Java VM: OpenJDK 64-Bit Server VM (24.91-b01 mixed mode linux-amd64 compressed oops)
+# Derivative: IcedTea 2.6.3
+# Distribution: Ubuntu 14.04 LTS, package 7u91-2.6.3-0ubuntu0.14.04.1
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f0b1c076000):  VMThread [stack: 0x00007f0b185f6000,0x00007f0b186f7000] [id=18538]
+
+Stack: [0x00007f0b185f6000,0x00007f0b186f7000],  sp=0x00007f0b186f5490,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x953e15]  VMError::report_and_die()+0x175
+V  [libjvm.so+0x48fd94]  report_vm_out_of_memory(char const*, int, unsigned long, char const*)+0x74
+V  [libjvm.so+0x7cf87b]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0xeb
+V  [libjvm.so+0x7ca33f]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x1f
+V  [libjvm.so+0x83dacb]  PSVirtualSpace::expand_by(unsigned long)+0x5b
+V  [libjvm.so+0x83e930]  PSYoungGen::resize_generation(unsigned long, unsigned long)+0xb0
+V  [libjvm.so+0x83f01b]  PSYoungGen::resize(unsigned long, unsigned long)+0x1b
+V  [libjvm.so+0x83b258]  PSScavenge::invoke_no_policy()+0xd68
+V  [libjvm.so+0x83bac8]  PSScavenge::invoke()+0x38
+V  [libjvm.so+0x7f2083]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x63
+V  [libjvm.so+0x955814]  VM_ParallelGCFailedAllocation::doit()+0x84
+V  [libjvm.so+0x959917]  VM_Operation::evaluate()+0x47
+V  [libjvm.so+0x9583d8]  VMThread::evaluate_operation(VM_Operation*)+0x318
+V  [libjvm.so+0x958839]  VMThread::loop()+0x219
+V  [libjvm.so+0x958c82]  VMThread::run()+0x72
+V  [libjvm.so+0x7cc742]  java_start(Thread*)+0xf2
+
+VM_Operation (0x00007f0b248fba60): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f0b1c00a800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f0b1c1bc800 JavaThread "pool-1-thread-4" [_thread_blocked, id=18592, stack(0x00007f0ae749a000,0x00007f0ae759b000)]
+  0x00007f0b1c1bb000 JavaThread "pool-1-thread-3" [_thread_blocked, id=18590, stack(0x00007f0ae759b000,0x00007f0ae769c000)]
+  0x00007f0b1c1b9800 JavaThread "pool-1-thread-2" [_thread_blocked, id=18587, stack(0x00007f0ae769c000,0x00007f0ae779d000)]
+  0x00007f0b1c1ac800 JavaThread "pool-2-thread-1" [_thread_blocked, id=18577, stack(0x00007f0ae779d000,0x00007f0ae789e000)]
+  0x00007f0b1c1ab000 JavaThread "pool-1-thread-1" [_thread_blocked, id=18576, stack(0x00007f0ae789e000,0x00007f0ae799f000)]
+  0x00007f0b1c0b1800 JavaThread "Service Thread" daemon [_thread_blocked, id=18566, stack(0x00007f0b092ec000,0x00007f0b093ed000)]
+  0x00007f0b1c0af800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=18565, stack(0x00007f0b180f1000,0x00007f0b181f2000)]
+  0x00007f0b1c0ac800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=18564, stack(0x00007f0b181f2000,0x00007f0b182f3000)]
+  0x00007f0b1c0aa000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=18563, stack(0x00007f0b182f3000,0x00007f0b183f4000)]
+  0x00007f0b1c07c000 JavaThread "Finalizer" daemon [_thread_blocked, id=18549, stack(0x00007f0b183f
