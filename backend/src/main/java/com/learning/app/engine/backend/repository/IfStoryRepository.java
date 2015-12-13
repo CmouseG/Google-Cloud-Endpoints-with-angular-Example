@@ -12,6 +12,5 @@ public interface IfStoryRepository {
     Story update(Story story);
     Story findByIdDAO(Long id);
     CollectionResponse<Story> findAllStoriesDAO();
-    CollectionResponse<Story> findByStoryNameDAO(String storyName);
     Story remove(Story story);
 }

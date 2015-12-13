@@ -5,9 +5,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.learning.app.engine.backend.model.Story;
+import com.google.api.client.util.DateTime;
 
 import java.util.Calendar;
+import backend.engine.app.learning.com.storyApi.model.Story;
 
 import engine.app.learning.com.learningappengine.R;
 
@@ -16,6 +17,9 @@ import engine.app.learning.com.learningappengine.R;
  * Created by elton on 19/07/15.
  */
 public class StoryHelper {
+
+    private static final String EMPTY = "";
+    private static final int FIRST_POSITION = 0;
 
     private Activity context;
     private Spinner component;
@@ -34,13 +38,20 @@ public class StoryHelper {
         this.sprint = (EditText) context.findViewById(R.id.sprint);
     }
 
+    public void clear() {
+        this.storyName.setText(EMPTY);
+        this.sprint.setText(EMPTY);
+        this.component.setSelection(FIRST_POSITION);
+        this.participants.setSelection(FIRST_POSITION);
+    }
+
     public Story createStoryRequestDTO() {
         Story story = new Story();
         story.setComponent(component.getSelectedItem().toString());
         story.setParticipants(Long.parseLong(participants.getSelectedItem().toString()));
         story.setSprint(String.valueOf(sprint.getText()));
         story.setStoryName(String.valueOf(storyName.getText()));
-        story.setRegDate(Calendar.getInstance().getTime());
+        story.setRegDate(new DateTime(Calendar.getInstance().getTime()));
         return story;
     }
 

@@ -36,7 +36,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
       GApi.execute('storyApi', 'stories.list').then(function(resp) {
               $scope.results = resp.items;
           }, function() {
-              console.log("error :(");
+            $scope.fakeError('An unexpected error occurred');
           });
     };
 
@@ -67,7 +67,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.updateFlag = true;
             fillStory(resp);
         }, function() {
-            console.log("error :(");
+            $scope.fakeError('An unexpected error occurred');
         });
     }
 
@@ -77,7 +77,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
         GApi.execute('storyApi', 'story.remove', {id : id}).then(function(resp) {
             $scope.stories();
         }, function() {
-            console.log("error :(");
+            $scope.fakeError('An unexpected error occurred');
         });
     }
 
@@ -86,7 +86,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.stories();
             clear();
         }, function() {
-            console.log("error :(");
+            $scope.fakeError('An unexpected error occurred');
         });
      }
 
@@ -95,7 +95,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.stories();
             clear();
         }, function() {
-            console.log("error :(");
+            $scope.fakeError('An unexpected error occurred');
         });
      }
 

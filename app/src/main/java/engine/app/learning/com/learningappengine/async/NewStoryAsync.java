@@ -6,9 +6,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.learning.app.engine.backend.model.Story;
-import com.learning.app.engine.backend.service.StoryEndpoint;
-
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import java.io.IOException;
+import backend.engine.app.learning.com.storyApi.StoryApi;
+import backend.engine.app.learning.com.storyApi.model.Story;
 import engine.app.learning.com.learningappengine.R;
 
 /**
@@ -17,12 +19,22 @@ import engine.app.learning.com.learningappengine.R;
 public class NewStoryAsync extends AsyncTask<Void, Void, Story> {
 
     private Activity context;
+    private StoryApi api;
     private Story story;
     private ProgressDialog progressDialog;
 
     public NewStoryAsync(Activity context, Story story) {
         this.context = context;
         this.story = story;
+    }
+
+    private void init() {
+        if(api == null) {  // Only do this once
+            StoryApi.Builder builder = new StoryApi.Builder(AndroidHttp.newCompatibleTransport(),
+                    new AndroidJsonFactory(), null)
+                    .setRootUrl(context.getString(R.string.project_id));
+            api = builder.build();
+        }
     }
 
     @Override
@@ -36,14 +48,12 @@ public class NewStoryAsync extends AsyncTask<Void, Void, Story> {
     @Override
     protected Story doInBackground(Void... params) {
         try {
-            Log.e(context.getLocalClassName(), "BEGIN => createNewStory");
-            StoryEndpoint endpoint = new StoryEndpoint();
-            Story storySaved = endpoint.save(story);
-            return storySaved;
-        } catch (Exception ex) {
-            Log.e(context.getLocalClassName(), ex.getMessage(), ex);
+            init();
+            return api.story().save(story).execute();
+        } catch (IOException e) {
+            Log.e("UNEXPECTED ERROR", e.getMessage());
+            return null;
         }
-        return null;
     }
 
     @Override

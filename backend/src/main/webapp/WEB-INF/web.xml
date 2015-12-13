@@ -5,7 +5,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.learning.app.engine.backend.service.StoryEndpoint</param-value>
+            <param-value>com.learning.app.engine.backend.api.StoryEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

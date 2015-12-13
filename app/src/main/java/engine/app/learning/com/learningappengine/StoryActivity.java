@@ -46,5 +46,6 @@ public class StoryActivity extends Activity {
         if(helper.validate()) {
             new NewStoryAsync(this,helper.createStoryRequestDTO()).execute();
         }
+        helper.clear();
     }
 }

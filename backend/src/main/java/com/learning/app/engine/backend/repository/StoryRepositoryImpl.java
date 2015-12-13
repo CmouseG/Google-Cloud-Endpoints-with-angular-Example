@@ -55,14 +55,6 @@ public class StoryRepositoryImpl implements IfStoryRepository {
     }
 
     @Override
-    public CollectionResponse<Story> findByStoryNameDAO(String storyName) {
-        List<Story> storiesByName = ofy().load().type(Story.class)
-                .filter("storyName", storyName).list();
-
-        return CollectionResponse.<Story>builder().setItems(storiesByName).build();
-    }
-
-    @Override
     public Story remove(Story story) {
         ofy().delete().entity(story).now();
         return story;
