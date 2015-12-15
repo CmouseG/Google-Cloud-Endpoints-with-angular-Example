@@ -36,7 +36,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
       GApi.executeAuth('storyApi', 'stories.list').then(function(resp) {
               $scope.results = resp.items;
           }, function() {
-            $scope.fakeError(resp);
+            $scope.fakeError("You must be authenticated");
           });
     };
 
@@ -67,7 +67,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.updateFlag = true;
             fillStory(resp);
         }, function() {
-            $scope.fakeError(resp.error.message);
+            $scope.fakeError("You must be authenticated");
         });
     }
 
@@ -77,7 +77,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
         GApi.executeAuth('storyApi', 'story.remove', {id : id}).then(function(resp) {
             $scope.stories();
         }, function() {
-            $scope.fakeError(resp.error.message);
+            $scope.fakeError("You must be authenticated");
         });
     }
 
@@ -86,7 +86,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.stories();
             clear();
         }, function() {
-            $scope.fakeError(resp.error.message);
+            $scope.fakeError("You must be authenticated");
         });
      }
 
@@ -95,7 +95,7 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
             $scope.stories();
             clear();
         }, function() {
-            $scope.fakeError(resp.error.message);
+            $scope.fakeError("You must be authenticated");
         });
      }
 
