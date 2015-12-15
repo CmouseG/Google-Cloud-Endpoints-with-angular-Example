@@ -10,11 +10,6 @@ public final class AppConstants {
     // User: Update keys
 
     /**
-     * Google Cloud Messaging API key.
-     */
-    public static final String GCM_API_KEY = "AIzaSyAHiW8ZkDHAkS6E3VrkbsKX1HaZlpZ0axI";
-
-    /**
      * Android client ID from Google Cloud console.
      */
     public static final String ANDROID_CLIENT_ID = "938739565497-6tl3ncuainvk4998hki254jg7diabfd6.apps.googleusercontent.com";
@@ -22,7 +17,7 @@ public final class AppConstants {
     /**
      * Web client ID from Google Cloud console.
      */
-    public static final String WEB_CLIENT_ID = "938739565497-5rgdstttaomdseic2hvrcbpbhcssj6i1.apps.googleusercontent.com";
+    public static final String WEB_CLIENT_ID = "938739565497-i4njb8kpphdt3kqrn6ruuc2n480ik0q5.apps.googleusercontent.com";
 
     /**
      * Audience ID used to limit access to some client to the API.
@@ -38,4 +33,9 @@ public final class AppConstants {
      * API package path.
      */
     public static final String API_PACKAGE_PATH = "";
+
+    /**
+     * API email Scope.
+     */
+    public static final String EMAIL_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
 }

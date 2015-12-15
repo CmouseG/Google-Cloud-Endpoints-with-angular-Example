@@ -10,6 +10,7 @@ import com.google.api.server.spi.response.BadRequestException;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
+import com.google.appengine.api.users.User;
 import com.learning.app.engine.backend.constants.AppConstants;
 import com.learning.app.engine.backend.model.Story;
 import com.learning.app.engine.backend.repository.StoryRepositoryImpl;
@@ -29,15 +30,18 @@ import java.util.Calendar;
     )
 )
 @ApiClass(resource = "story",
-        clientIds = {
-                AppConstants.ANDROID_CLIENT_ID,
-                AppConstants.WEB_CLIENT_ID},
+        scopes = {AppConstants.EMAIL_SCOPE},
+        clientIds = {AppConstants.ANDROID_CLIENT_ID, AppConstants.WEB_CLIENT_ID,
+                com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID},
         audiences = {AppConstants.AUDIENCE_ID}
 )
 public class StoryEndpoint {
 
     @ApiMethod(name = "story.by.id", httpMethod = ApiMethod.HttpMethod.GET)
-    public Story findById(@Named("id") Long id) throws BadRequestException {
+    public Story findById(User user, @Named("id") Long id) throws BadRequestException, UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("User not found");
+        }
         if (id == null) {
             throw new BadRequestException("Missing attribute id");
         }
@@ -45,12 +49,18 @@ public class StoryEndpoint {
     }
 
     @ApiMethod(name = "stories.list", httpMethod = ApiMethod.HttpMethod.GET)
-    public CollectionResponse<Story> listStories() {
+    public CollectionResponse<Story> listStories(User user) throws UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("User not found");
+        }
         return StoryRepositoryImpl.getInstance().findAllStoriesDAO();
     }
 
     @ApiMethod(name = "story.save", httpMethod = ApiMethod.HttpMethod.POST)
-    public Story save(Story story) throws UnauthorizedException {
+    public Story save(User user, Story story) throws UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("User not found");
+        }
         if (story == null) {
             throw new UnauthorizedException("Request is invalid");
         }
@@ -59,11 +69,14 @@ public class StoryEndpoint {
     }
 
     @ApiMethod(name = "story.remove", httpMethod = ApiMethod.HttpMethod.DELETE)
-    public Story remove(@Named("id") Long id) throws NotFoundException, BadRequestException {
+    public Story remove(User user, @Named("id") Long id) throws NotFoundException, BadRequestException, UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("User not found");
+        }
         if (id == null) {
             throw new BadRequestException("Missing attribute id");
         }
-        Story story = findById(id);
+        Story story = findById(user,id);
         if (story == null) {
             throw new NotFoundException("Cannot find story to remove");
         }
@@ -71,7 +84,10 @@ public class StoryEndpoint {
     }
 
     @ApiMethod(name = "story.update", httpMethod = ApiMethod.HttpMethod.PUT)
-    public Story update(Story story) throws BadRequestException {
+    public Story update(User user, Story story) throws BadRequestException, UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("User not found");
+        }
         if (story == null || story.getId() == null) {
             throw new BadRequestException("Missing attribute id");
         }

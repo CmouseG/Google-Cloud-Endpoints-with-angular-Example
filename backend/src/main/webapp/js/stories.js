@@ -33,10 +33,10 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
 
     $scope.stories = function() {
       $scope.updateFlag = false;
-      GApi.execute('storyApi', 'stories.list').then(function(resp) {
+      GApi.executeAuth('storyApi', 'stories.list').then(function(resp) {
               $scope.results = resp.items;
           }, function() {
-            $scope.fakeError('An unexpected error occurred');
+            $scope.fakeError(resp);
           });
     };
 
@@ -63,39 +63,39 @@ learningApi.controller('NewStoryCtrl', function($scope,$window,$timeout,GApi) {
     }
 
     $scope.prepareUpdate = function(id) {
-        GApi.execute('storyApi', 'story.by.id', {id : id}).then(function(resp) {
+        GApi.executeAuth('storyApi', 'story.by.id', {id : id}).then(function(resp) {
             $scope.updateFlag = true;
             fillStory(resp);
         }, function() {
-            $scope.fakeError('An unexpected error occurred');
+            $scope.fakeError(resp.error.message);
         });
     }
 
     /** Javascript functions **/
 
     function doRemove(id) {
-        GApi.execute('storyApi', 'story.remove', {id : id}).then(function(resp) {
+        GApi.executeAuth('storyApi', 'story.remove', {id : id}).then(function(resp) {
             $scope.stories();
         }, function() {
-            $scope.fakeError('An unexpected error occurred');
+            $scope.fakeError(resp.error.message);
         });
     }
 
      function save() {
-        GApi.execute('storyApi', 'story.save', $scope.story).then(function(resp) {
+        GApi.executeAuth('storyApi', 'story.save', $scope.story).then(function(resp) {
             $scope.stories();
             clear();
         }, function() {
-            $scope.fakeError('An unexpected error occurred');
+            $scope.fakeError(resp.error.message);
         });
      }
 
      function update() {
-        GApi.execute('storyApi', 'story.update', $scope.story).then(function(resp) {
+        GApi.executeAuth('storyApi', 'story.update', $scope.story).then(function(resp) {
             $scope.stories();
             clear();
         }, function() {
-            $scope.fakeError('An unexpected error occurred');
+            $scope.fakeError(resp.error.message);
         });
      }
 
