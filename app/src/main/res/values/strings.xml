@@ -11,7 +11,7 @@
     <string name="wait">Please, wait...</string>
     <string name="new_story_success">New story has been created successfully</string>
     <string name="new_story_error">An unexpected error ocurrers</string>
-    <string name="project_id">https://learning-api-project.appspot.com/_ah/api/</string>
+    <string name="project_id">http://10.0.3.2:8080/_ah/api/</string>
 
     // number of people
     <string-array name="participants_array">

@@ -5,6 +5,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.DateTime;
 
 import java.util.Calendar;
@@ -55,10 +56,14 @@ public class StoryHelper {
         return story;
     }
 
-    public boolean validate() {
+    public boolean validate(GoogleAccountCredential credential) {
         String sprintAsString = sprint.getText().toString();
         String storyAsString = storyName.getText().toString();
 
+        if (credential == null) {
+            Toast.makeText(context, "You must be authenticated!", Toast.LENGTH_LONG).show();
+            return false;
+        }
         if(participants.getSelectedItemPosition() == 0) {
             Toast.makeText(context, context.getString(R.string.error_number_participants), Toast.LENGTH_LONG).show();
             return false;

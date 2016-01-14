@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+
 import java.io.IOException;
 import backend.engine.app.learning.com.storyApi.StoryApi;
 import backend.engine.app.learning.com.storyApi.model.Story;
@@ -20,18 +22,20 @@ public class NewStoryAsync extends AsyncTask<Void, Void, Story> {
 
     private Activity context;
     private StoryApi api;
+    private GoogleAccountCredential credential;
     private Story story;
     private ProgressDialog progressDialog;
 
-    public NewStoryAsync(Activity context, Story story) {
+    public NewStoryAsync(Activity context, GoogleAccountCredential credential, Story story) {
         this.context = context;
+        this.credential = credential;
         this.story = story;
     }
 
     private void init() {
         if(api == null) {  // Only do this once
             StoryApi.Builder builder = new StoryApi.Builder(AndroidHttp.newCompatibleTransport(),
-                    new AndroidJsonFactory(), null)
+                    new AndroidJsonFactory(), credential)
                     .setRootUrl(context.getString(R.string.project_id));
             api = builder.build();
         }

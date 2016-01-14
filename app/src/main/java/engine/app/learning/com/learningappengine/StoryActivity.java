@@ -6,9 +6,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import engine.app.learning.com.learningappengine.async.NewStoryAsync;
 import engine.app.learning.com.learningappengine.helper.StoryHelper;
+import engine.app.learning.com.learningappengine.model.MyApplication;
 
 /**
  * Created by elton on 24/07/15.
@@ -40,11 +41,11 @@ public class StoryActivity extends Activity {
 
     public void register(View v) {
         // feedback animation onClick()
-        Animation onClickAnimation = AnimationUtils
-                .loadAnimation(this, R.anim.onclickanim);
+        Animation onClickAnimation = AnimationUtils.loadAnimation(this, R.anim.onclickanim);
         v.startAnimation(onClickAnimation);
-        if(helper.validate()) {
-            new NewStoryAsync(this,helper.createStoryRequestDTO()).execute();
+        GoogleAccountCredential credential = ((MyApplication) this.getApplication()).getGoogleAccountCredential();
+        if(helper.validate(credential)) {
+            new NewStoryAsync(this,credential,helper.createStoryRequestDTO()).execute();
         }
         helper.clear();
     }
