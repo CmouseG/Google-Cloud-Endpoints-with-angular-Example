@@ -10,15 +10,12 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccoun
  */
 public class MyApplication extends android.app.Application {
 
-    private String accountName;
     private GoogleAccountCredential googleAccountCredential;
+    private User user;
 
-    public String getAccountName() {
-        return accountName;
-    }
-
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public GoogleAccountCredential getGoogleAccountCredential() {
@@ -29,8 +26,11 @@ public class MyApplication extends android.app.Application {
         this.googleAccountCredential = googleAccountCredential;
     }
 
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

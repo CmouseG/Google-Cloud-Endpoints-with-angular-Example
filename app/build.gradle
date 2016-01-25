@@ -38,4 +38,5 @@ dependencies {
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.google.apis:google-api-services-plus:v1-rev255-1.20.0'
 }
